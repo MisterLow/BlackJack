@@ -1,4 +1,4 @@
-package project;
+package project.cards;
 
 /**
  * A class to model a standard playing card

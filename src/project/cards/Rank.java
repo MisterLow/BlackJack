@@ -1,4 +1,4 @@
-package project;
+package project.cards;
 
 /**
  * An enum to represent the rank of the card
