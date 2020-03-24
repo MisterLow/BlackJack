@@ -1,8 +1,3 @@
-/**
- * SYST 17796 Project Base code.
- * Students can modify and extend to implement their game.
- * Add your name as a modifier and the date!
- */
 package project;
 
 import java.util.ArrayList;
@@ -12,8 +7,6 @@ import java.util.ArrayList;
  * this class and instantiate the methods given.
  *
  * @author megha,2020
- * @author Christopher Lewis 991585051
- * @author Alexander Low 991266865
  */
 public abstract class Game {
 
