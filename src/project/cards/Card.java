@@ -8,11 +8,15 @@ package project.cards;
  * @version 2020/03/23
  */
 public class Card {
-    //default modifier for child classes
 
     private final Rank rank;
     private final Suit suit;
 
+    /**
+     *
+     * @param rank
+     * @param suit
+     */
     public Card(Rank rank, Suit suit) {
         this.rank = rank;
         this.suit = suit;
@@ -22,14 +26,14 @@ public class Card {
      * @return the rank
      */
     public Rank getRank() {
-        return rank;
+        return this.rank;
     }
 
     /**
      * @return the suit
      */
     public Suit getSuit() {
-        return suit;
+        return this.suit;
     }
 
     @Override

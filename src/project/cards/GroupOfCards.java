@@ -15,7 +15,8 @@ public class GroupOfCards {
     private int size;//the size of the grouping
 
     public GroupOfCards(int givenSize) {
-        size = givenSize;
+        setSize(givenSize);
+        cards = new ArrayList(size); 
     }
 
     /**
@@ -41,7 +42,7 @@ public class GroupOfCards {
     /**
      * @param givenSize the max size for the group of cards
      */
-    public void setSize(int givenSize) {
+    private void setSize(int givenSize) {
         size = givenSize;
     }
 
