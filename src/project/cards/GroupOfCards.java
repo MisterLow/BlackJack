@@ -16,7 +16,7 @@ public class GroupOfCards {
 
     public GroupOfCards(int givenSize) {
         setSize(givenSize);
-        cards = new ArrayList(size); 
+        cards = new ArrayList(size);
     }
 
     /**
