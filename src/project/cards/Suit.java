@@ -1,4 +1,4 @@
-package project;
+package project.cards;
 
 /**
  * An enum to represent the suit of the card

@@ -1,4 +1,4 @@
-package project;
+package project.cards;
 
 /**
  * A class that represents a player's hand
@@ -6,7 +6,7 @@ package project;
  * @author megha,2020
  * @author Christopher Lewis 991585051
  * @author Alexander Low 991266865
- * @version 2020/03/23
+ * @version 2020/03/25
  */
 public class Hand extends GroupOfCards {
 
