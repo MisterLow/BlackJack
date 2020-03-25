@@ -1,0 +1,55 @@
+Please enter your name: ____
+
+Hello ____, welcome to BlackJack.
+
+You currently have $____.
+
+// Bet
+How much would you like to bet?: 
+// Bet:Valid
+You have bet $__
+// Bet:Invalid
+Your bet is invalid, please try again. //Go to Bet
+
+// Game Start
+The Dealer deals cards to everyone.
+
+// Display Hands
+The Dealer currently has: Hidden, __ of ____
+You currently have: __ of ____, __ of ____ //Then go to prompt
+
+// Prompt
+What would you like to do? (Double down, Hit, Stand, Check Money):
+
+// Double Down
+The Dealer deals a card to you.
+Your bet has been doubled //Go to Stand
+
+// Hit
+The Dealer deals a card to you. //Then display the hands
+
+// Stand
+You have ended your turn //Dealer makes turns if they wish, then check the results
+
+// Check Money
+You currently have $____. //then return to prompt
+
+// Dealer turn
+The Dealer deals a card to themself //Then display the hand
+
+// Check winners
+Your hand is __, the dealer's hand is __
+// Check winners:Valid
+You won $__ 
+// Check winners:Invalid
+The Dealer won, you lost $__
+
+// Check money > 0
+Would you like to play again?:
+// Else 
+You do not have enough money to continue. You have been removed from the table.
+
+// Continue:Yes
+//Go to bet
+// Continue:No
+Thank you for playing. You left with $___.
