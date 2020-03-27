@@ -5,6 +5,9 @@ package project;
  * which should be unique.
  *
  * @author megha,2020
+ * @author Christopher Lewis 991585051
+ * @author Alexander Low 991266865
+ * @version 2020/03/23
  */
 public abstract class Player {
 
@@ -41,9 +44,9 @@ public abstract class Player {
      */
     public abstract void play();
 
-	public int getHandValue() {
-		// TODO - implement Player.getHandValue
-		throw new UnsupportedOperationException();
-	}
+    public int getHandValue() {
+        // TODO - implement Player.getHandValue
+        throw new UnsupportedOperationException();
+    }
 
 }
