@@ -12,5 +12,9 @@ public class Hand extends GroupOfCards {
     public Hand() {
         super(12); // The maximum size of a hand with one deck of cards is 12
     }
-
+    
+    public void clearHand(){
+        showCards().clear();
+    }
+    
 }
