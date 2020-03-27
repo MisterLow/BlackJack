@@ -2,7 +2,10 @@ package project;
 
 /**
  *
- * @author Alexander
+ *
+ * @author Christopher Lewis 991585051
+ * @author Alexander Low 991266865
+ * @version 2020/03/27
  */
 public class UserActions {
 

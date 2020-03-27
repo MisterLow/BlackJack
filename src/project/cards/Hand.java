@@ -17,4 +17,11 @@ public class Hand extends GroupOfCards {
         showCards().clear();
     }
     
+    /**
+     * @return the size of the group of cards
+     */
+    @Override
+    public int getSize(){
+        return this.showCards().size();
+    }
 }
