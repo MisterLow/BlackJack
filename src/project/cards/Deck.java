@@ -9,26 +9,44 @@ package project.cards;
  */
 public class Deck extends GroupOfCards {
 
+    private int deckAmount;
+
+    /**
+     * The default constructor that will generate 1 deck of cards
+     */
     public Deck() {
-        super(52);
+        this(1);
     }
 
+    /**
+     *
+     * @param deckAmount
+     */
+    public Deck(int deckAmount) {
+        super(deckAmount * 52);
+        this.deckAmount = deckAmount;
+        generateDeck();
+    }
+
+    /**
+     * Generate a standard deck of cards
+     */
     public void generateDeck() {
-        for (Suit s : Suit.values()) {
-            for (Rank r : Rank.values()) {
-                showCards().add(new Card(r, s));
+        for (int i = 0; i < deckAmount; i++) {
+            for (Suit s : Suit.values()) {
+                for (Rank r : Rank.values()) {
+                    showCards().add(new Card(r, s));
+                }
             }
         }
     }
 
-    public void drawCard(Hand h) {
-        h.showCards().add(this.showCards().get(this.showCards().size() - 1));
-        this.showCards().remove(this.showCards().size() - 1);
-    }
-    
-    public void resetDeck(){
-        showCards().clear();
+    /**
+     * Reset the deck to default
+     */
+    public void resetDeck() {
+        clearCards();
         generateDeck();
     }
-    
+
 }

@@ -44,9 +44,4 @@ public abstract class Player {
      */
     public abstract void play();
 
-    public int getHandValue() {
-        // TODO - implement Player.getHandValue
-        throw new UnsupportedOperationException();
-    }
-
 }

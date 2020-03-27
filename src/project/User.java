@@ -40,8 +40,12 @@ public class User extends Player {
     /**
      *
      * @param money
+     * @throws java.lang.Exception
      */
-    public void setMoney(int money) {
+    public void setMoney(int money) throws Exception {
+        if (money < 0) {
+            throw new Exception("Money can not go into the negatives");
+        }
         this.money = money;
     }
 
