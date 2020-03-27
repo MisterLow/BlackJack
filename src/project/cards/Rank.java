@@ -1,7 +1,7 @@
 package project.cards;
 
 /**
- * An enum to represent the rank of the card
+ * A class that represents a player's hand
  *
  * @author Christopher Lewis 991585051
  * @author Alexander Low 991266865

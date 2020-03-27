@@ -45,4 +45,24 @@ public class User extends Player {
         this.money = money;
     }
 
+    /**
+     *
+     * @param money
+     */
+    public void addMoney(int money) {
+        this.money += money;
+    }
+
+    /**
+     *
+     * @param money
+     * @throws java.lang.Exception
+     */
+    public void removeMoney(int money) throws Exception {
+        if ((this.money - money) < 0) {
+            throw new Exception("Money can not go into the negatives");
+        }
+        this.money -= money;
+    }
+
 }
