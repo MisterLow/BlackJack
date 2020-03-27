@@ -25,4 +25,10 @@ public class Deck extends GroupOfCards {
         h.showCards().add(this.showCards().get(this.showCards().size() - 1));
         this.showCards().remove(this.showCards().size() - 1);
     }
+    
+    public void resetDeck(){
+        showCards().clear();
+        generateDeck();
+    }
+    
 }
