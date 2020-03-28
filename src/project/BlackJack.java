@@ -3,14 +3,13 @@ package project;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import project.cards.Card;
 import project.cards.Deck;
-import project.cards.Hand;
 
 public class BlackJack extends Game {
 
     private Dealer dealer = new Dealer();
     private Deck deck = new Deck();
+    private final int payoutMultiplier = 2;
 
     public BlackJack() {
         super("BlackJack");
@@ -23,15 +22,24 @@ public class BlackJack extends Game {
     public void play() {
         System.out.println("Welcome to " + getGameName());
         this.addUser(new User(getUserName()));
+        // Add the starting amount
+        getUsers().get(0).addMoney(1000);
 
         setupRound();
         //User's turn
-        while (this.getUsers().get(0).getInRound()) {
+        try {
+            makeBet(getUsers().get(0));
+        } catch (Exception ex) {
+            Logger.getLogger(BlackJack.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        while (getUsers().get(0).getInRound()) {
             break;//to add
         }
+
         //Dealer's turn
-        while (dealer.getInRound()) {
-            break;//to add
+        while (dealer.play()) {
+            hit(dealer);
         }
 
         declareWinner();
@@ -65,24 +73,42 @@ public class BlackJack extends Game {
 
     /**
      *
+     * @param user
+     * @throws java.lang.Exception
      */
-    public void makeBet() {
-
+    public void makeBet(User user) throws Exception {
+        Scanner in = new Scanner(System.in);
+        int bet;
+        do {
+            printMoney(user);
+            System.out.println("How much would you like to bet?: ");
+            bet = in.nextInt();
+        } while (bet > user.getMoney());
+        user.setCurrentBet(bet);
     }
-
+    
     /**
-     *
+     * 
+     * @param user 
      */
-    public void hit() {
-
+    public void printMoney(User user) {
+        System.out.println("You currently have: " + user.getMoney());
     }
 
     /**
      *
      * @param player
      */
-    public void stand(Player player) {
-        player.setInRound(false);
+    public void hit(Player player) {
+
+    }
+
+    /**
+     *
+     * @param user
+     */
+    public void stand(User user) {
+        user.setInRound(false);
     }
 
     /**
@@ -97,7 +123,7 @@ public class BlackJack extends Game {
         } catch (Exception ex) {
             Logger.getLogger(BlackJack.class.getName()).log(Level.SEVERE, null, ex);
         }
-        hit();
+        hit(user);
         stand(user);
     }
 

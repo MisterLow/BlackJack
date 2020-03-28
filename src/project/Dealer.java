@@ -6,8 +6,10 @@ public class Dealer extends Player {
         super("Dealer");
     }
 
-    @Override
-    public void play() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean play() {
+        if (getValue() < 17) {
+            return true;
+        }
+        return false;
     }
 }

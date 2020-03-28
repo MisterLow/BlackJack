@@ -15,7 +15,6 @@ import project.cards.Hand;
 public abstract class Player {
 
     private String playerID; //the unique ID for this player
-    private boolean inRound = true;
     private Hand hand = new Hand();
 
     /**
@@ -44,13 +43,8 @@ public abstract class Player {
     }
 
     /**
-     * The method to be instantiated when you subclass the Player class with
-     * your specific type of Player and filled in with logic to play your game.
-     */
-    public abstract void play();
-
-    /**
      * Get the value of the player's hand
+     *
      * @return the value of the hand in BlackJack
      */
     public int getValue() {
@@ -85,27 +79,16 @@ public abstract class Player {
         return hValue;
     }
 
-	public boolean getInRound() {
-		return this.inRound;
-	}
+    public Hand getHand() {
+        return this.hand;
+    }
 
-	/**
-	 * 
-	 * @param inRound
-	 */
-	public void setInRound(boolean inRound) {
-		this.inRound = inRound;
-	}
+    /**
+     *
+     * @param hand
+     */
+    public void setHand(Hand hand) {
+        this.hand = hand;
+    }
 
-	public Hand getHand() {
-		return this.hand;
-	}
-
-	/**
-	 * 
-	 * @param hand
-	 */
-	public void setHand(Hand hand) {
-		this.hand = hand;
-	}
 }
