@@ -10,6 +10,7 @@ package project;
 public class User extends Player {
 
     private int currentBet;
+    private boolean inRound = true;
     private int money;
 
     public User(String name) {
@@ -65,9 +66,29 @@ public class User extends Player {
         this.money -= money;
     }
 
-    @Override
-    public void play() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     *
+     */
+    public void checkLoss() {
+        if (this.getValue() > 21) {
+            setInRound(false);
+        }
+    }
+
+    /**
+     *
+     * @return
+     */
+    public boolean getInRound() {
+        return this.inRound;
+    }
+
+    /**
+     *
+     * @param inRound
+     */
+    public void setInRound(boolean inRound) {
+        this.inRound = inRound;
     }
 
 }
