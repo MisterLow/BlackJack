@@ -16,37 +16,33 @@ public class User extends Player {
         super(name);
     }
 
-    @Override
-    public void play() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    /**
+     * @return The current bet amount
+     */
     public int getCurrentBet() {
         return this.currentBet;
     }
 
     /**
      *
-     * @param currentBet
+     * @param bet The bet the user wishes to make
+     * @throws java.lang.Exception If the bet is too high
      */
-    public void setCurrentBet(int currentBet) {
-        this.currentBet = currentBet;
+    public void setCurrentBet(int bet) throws Exception {
+        if (bet > money) {
+            throw new Exception("Bet can not be greater than the User's current"
+                    + " amount of money");
+        }
+        removeMoney(bet);
+        this.currentBet += bet;
+    }
+
+    public void resetBet() {
+        this.currentBet = 0;
     }
 
     public int getMoney() {
         return this.money;
-    }
-
-    /**
-     *
-     * @param money
-     * @throws java.lang.Exception
-     */
-    public void setMoney(int money) throws Exception {
-        if (money < 0) {
-            throw new Exception("Money can not go into the negatives");
-        }
-        this.money = money;
     }
 
     /**
@@ -67,6 +63,11 @@ public class User extends Player {
             throw new Exception("Money can not go into the negatives");
         }
         this.money -= money;
+    }
+
+    @Override
+    public void play() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
