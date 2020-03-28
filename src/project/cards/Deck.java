@@ -19,7 +19,7 @@ public class Deck extends GroupOfCards {
     }
 
     /**
-     *
+     * Generate as many Decks as needed
      * @param deckAmount
      */
     public Deck(int deckAmount) {
@@ -48,5 +48,4 @@ public class Deck extends GroupOfCards {
         clearCards();
         generateDeck();
     }
-
 }
