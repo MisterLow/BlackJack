@@ -20,7 +20,7 @@ public class Dealer extends Player {
         return false;
     }
 
-    public Dealer getInstance() {
+    public static Dealer getInstance() {
         if (dealer == null) {
             dealer = new Dealer();
         }

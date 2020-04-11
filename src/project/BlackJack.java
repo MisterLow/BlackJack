@@ -3,11 +3,12 @@ package project;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import project.cards.CardActions;
 import project.cards.Deck;
 
 public class BlackJack extends Game {
 
-    private Dealer dealer = new Dealer();
+    private Dealer dealer = Dealer.getInstance();
     private Deck deck = new Deck();
     private final int payoutMultiplier = 2;
 
@@ -65,9 +66,9 @@ public class BlackJack extends Game {
      */
     public void setupRound() {
         this.deck.generateDeck();
-        this.deck.moveCards(this.dealer.getHand(), 2);
+        CardActions.moveCards(deck, this.dealer.getHand(), 2);
         for (User u : this.getUsers()) {
-            this.deck.moveCards(u.getHand(), 2);
+            CardActions.moveCards(deck, u.getHand(), 2);
         }
     }
 
