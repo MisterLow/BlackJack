@@ -1,8 +1,15 @@
 package project;
 
+/**
+ * A class to represent the Dealer. There can only be one Dealer in a game.
+ *
+ * @author Alexander
+ */
 public class Dealer extends Player {
 
-    public Dealer() {
+    public static Dealer dealer = null;
+
+    private Dealer() {
         super("Dealer");
     }
 
@@ -12,4 +19,12 @@ public class Dealer extends Player {
         }
         return false;
     }
+
+    public Dealer getInstance() {
+        if (dealer == null) {
+            dealer = new Dealer();
+        }
+        return dealer;
+    }
+
 }
