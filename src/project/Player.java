@@ -1,6 +1,5 @@
 package project;
 
-import project.cards.Card;
 import project.cards.Hand;
 
 /**
@@ -40,43 +39,6 @@ public abstract class Player {
      */
     public void setPlayerID(String givenID) {
         playerID = givenID;
-    }
-
-    /**
-     * Get the value of the player's hand
-     *
-     * @return the value of the hand in BlackJack
-     */
-    public int getValue() {
-        int hValue = 0;
-        int aceCount = 0;
-        for (Card c : hand.showCards()) {
-            int cValue = c.getRank().getValue();
-
-            switch (cValue) {
-                case 11:
-                    cValue = 10;
-                    break;
-                case 12:
-                    cValue = 10;
-                    break;
-                case 13:
-                    cValue = 10;
-                    break;
-                case 1:
-                    cValue = 11;
-                    aceCount++;
-                    break;
-            }
-
-            while (aceCount > 0 && hValue > 21) {
-                hValue -= 10;
-                aceCount--;
-            }
-
-            hValue += cValue;
-        }
-        return hValue;
     }
 
     public Hand getHand() {

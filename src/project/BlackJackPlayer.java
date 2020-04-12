@@ -7,13 +7,13 @@ package project;
  * @author Alexander Low 991266865
  * @version 2020/03/25
  */
-public class User extends Player {
+public class BlackJackPlayer extends Player {
 
     private int currentBet;
     private boolean inRound = true;
     private int money;
 
-    public User(String name) {
+    public BlackJackPlayer(String name) {
         super(name);
     }
 
@@ -64,15 +64,6 @@ public class User extends Player {
             throw new Exception("Money can not go into the negatives");
         }
         this.money -= money;
-    }
-
-    /**
-     *
-     */
-    public void checkLoss() {
-        if (this.getValue() > 21) {
-            setInRound(false);
-        }
     }
 
     /**

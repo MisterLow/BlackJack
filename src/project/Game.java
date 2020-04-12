@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public abstract class Game {
 
     private final String gameName;//the title of the game
-    private ArrayList<User> players;// the players of the game
+    private ArrayList<BlackJackPlayer> players;// the players of the game
 
     public Game(String givenName) {
         gameName = givenName;
@@ -28,21 +28,21 @@ public abstract class Game {
     /**
      * @return the players of this game
      */
-    public ArrayList<User> getUsers() {
+    public ArrayList<BlackJackPlayer> getUsers() {
         return players;
     }
 
     /**
      * @param players the players of this game
      */
-    public void setUsers(ArrayList<User> players) {
+    public void setUsers(ArrayList<BlackJackPlayer> players) {
         this.players = players;
     }
 
     /**
      * @param player the player to add to this game
      */
-    public void addUser(User player) {
+    public void addUser(BlackJackPlayer player) {
         this.players.add(player);
     }
 

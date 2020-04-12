@@ -1,7 +1,8 @@
 package project.cards;
 
 /**
- * A class for the interactions between GroupOfCards 
+ * A class for the interactions between different GroupOfCards objects
+ *
  * @author Alexander
  */
 public class CardActions {
@@ -41,5 +42,4 @@ public class CardActions {
             moveCard(oldLocation, newLocation);
         }
     }
-
 }
