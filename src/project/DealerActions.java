@@ -27,7 +27,7 @@ public class DealerActions extends PlayerActions {
         return handString;
     }
 
-    public static String dealerPlay(Deck deck, Dealer dealer) {
+    public static String dealerPlay(Deck deck, Dealer dealer) throws Exception {
         while (BlackJackActions.calculateValue(dealer) <= 17) {
             hit(deck, dealer);
         }

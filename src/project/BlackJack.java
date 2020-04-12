@@ -3,8 +3,6 @@ package project;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import project.cards.CardActions;
 import project.cards.Deck;
 
@@ -45,7 +43,11 @@ public class BlackJack extends Game {
         }
 
         //Dealer's turn
-        System.out.println("\n" + DealerActions.dealerPlay(deck, dealer));
+        try {
+            System.out.println("\n" + DealerActions.dealerPlay(deck, dealer));
+        } catch (Exception ex) {
+            System.err.println(ex);
+        }
 
         declareWinner();
         endGame();
@@ -70,7 +72,7 @@ public class BlackJack extends Game {
 
             name = ln.nextLine();
             if (name.isEmpty() && playerNum == 1) {
-                name = "Default";
+                name = "DefaultName";
                 addUser(new BlackJackPlayer(name));
                 playerNum++;
                 name = "";
@@ -136,8 +138,10 @@ public class BlackJack extends Game {
     }
 
     /**
-     *
-     * @param user
+     * Prompt the user to make a move based on which options that they should
+     * be able to make (Doubling down if it's their first turn and they have
+     * enough money, Hitting or Standing)
+     * @param user The Player that is making the move
      */
     public void userMove(BlackJackPlayer user) {
         String prompt;
@@ -156,7 +160,11 @@ public class BlackJack extends Game {
                 response = response.substring(0, 1);
             }
             if (response.equalsIgnoreCase("D") && user.getHand().getSize() == 2 && (user.getCurrentBet() * 2) <= user.getMoney()) {
-                BlackJackPlayerActions.doubleDown(deck, user);
+                try {
+                    BlackJackPlayerActions.doubleDown(deck, user);
+                } catch (Exception ex) {
+                    System.err.println(ex);
+                }
                 System.out.println(BlackJackPlayerActions.playerHandString(user));
             } else if (response.equalsIgnoreCase("H")) {
                 try {
@@ -175,15 +183,18 @@ public class BlackJack extends Game {
     }
 
     /**
-     *
+     * Print the amount of money that the user has
      * @param user
      */
     public void printMoney(BlackJackPlayer user) {
-        System.out.println("\nYou currently have: " + user.getMoney());
+        System.out.println("\n" + user.getPlayerID() + " currently has $" + user.getMoney());
     }
 
     /**
-     * Find out who won the game and appropriately reward them
+     * Find out who won the game and appropriately reward them. There are 3
+     * main outcomes that can happen. Either the Dealer wins, the Dealer and 
+     * Players tie, resulting in their money being refunded, or they players 
+     * win and are rewarded
      */
     @Override
     public void declareWinner() {

@@ -17,17 +17,13 @@ public class BlackJackPlayerActions extends PlayerActions {
     }
 
     /**
-     *
+     * Let the Player double down if they have enough money from
      * @param deck
      * @param user
      */
-    public static void doubleDown(Deck deck, BlackJackPlayer user) {
-        try {
-            if (user.getCurrentBet() < user.getMoney()) {
-                user.setCurrentBet(user.getCurrentBet());
-            }
-        } catch (Exception ex) {
-            System.err.println(ex);
+    public static void doubleDown(Deck deck, BlackJackPlayer user) throws Exception {
+        if (user.getCurrentBet() < user.getMoney()) {
+            user.setCurrentBet(user.getCurrentBet());
         }
         hit(deck, user);
         stand(user);

@@ -10,16 +10,17 @@ import project.cards.Deck;
 public abstract class PlayerActions {
 
     /**
-     *
+     * Remove a card from the Deck and add it to the Player
      * @param deck
      * @param player
+     * @throws java.lang.Exception
      */
-    public static void hit(Deck deck, Player player) throws Exception {
+    public static void hit(Deck deck, Player player) throws Exception{
         CardActions.moveCard(deck, player.getHand());
     }
 
     /**
-     *
+     * Return the Player's hand as a String
      * @param player
      * @return
      */

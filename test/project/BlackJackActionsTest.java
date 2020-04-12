@@ -74,10 +74,10 @@ public class BlackJackActionsTest {
         System.out.println("testCalculateValueAces");
         BlackJackPlayer p = new BlackJackPlayer("Test");
         Card c1 = new Card(Rank.Ace, Suit.Clubs);
-        Card c2 = new Card(Rank.Ace, Suit.Diamonds);
         p.getHand().getCards().add(c1);
-        p.getHand().getCards().add(c2);
-        int expResult = 12;
+        p.getHand().getCards().add(c1);
+        p.getHand().getCards().add(c1);
+        int expResult = 13;
         assertEquals(expResult, BlackJackActions.calculateValue(p));
     }
 
