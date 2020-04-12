@@ -3,6 +3,8 @@ package project;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import project.cards.CardActions;
 import project.cards.Deck;
 
@@ -96,10 +98,18 @@ public class BlackJack extends Game {
     public void setupRound() {
         deck.generateDeck();
         deck.shuffle();
-        CardActions.moveCards(deck, dealer.getHand(), 2);
+        try {
+            CardActions.moveCards(deck, dealer.getHand(), 2);
+        } catch (Exception ex) {
+            System.err.println(ex);
+        }
         for (BlackJackPlayer user : getUsers()) {
             user.setInRound(true);
-            CardActions.moveCards(deck, user.getHand(), 2);
+            try {
+                CardActions.moveCards(deck, user.getHand(), 2);
+            } catch (Exception ex) {
+                System.err.println(ex);
+            }
         }
     }
 
@@ -134,7 +144,7 @@ public class BlackJack extends Game {
         String prompt;
         do {
             prompt = "What would you like to do " + user.getPlayerID() + "? (";
-            if (user.getHand().getSize() == 2) {
+            if (user.getHand().getSize() == 2 && (user.getCurrentBet() * 2) <= user.getMoney()) {
                 prompt += "Double Down, ";
             }
             prompt += "Hit or Stand): ";
@@ -146,11 +156,15 @@ public class BlackJack extends Game {
             } else {
                 response = response.substring(0, 1);
             }
-            if (response.equalsIgnoreCase("D") && user.getHand().getSize() == 2) {
+            if (response.equalsIgnoreCase("D") && user.getHand().getSize() == 2 && (user.getCurrentBet() * 2) <= user.getMoney()) {
                 BlackJackPlayerActions.doubleDown(deck, user);
                 System.out.println(BlackJackPlayerActions.playerHandString(user));
             } else if (response.equalsIgnoreCase("H")) {
-                BlackJackPlayerActions.hit(deck, user);
+                try {
+                    BlackJackPlayerActions.hit(deck, user);
+                } catch (Exception ex) {
+                    System.err.println(ex);
+                }
                 System.out.println(BlackJackPlayerActions.playerHandString(user));
             } else if (response.equalsIgnoreCase("S")) {
                 BlackJackPlayerActions.stand(user);
@@ -180,14 +194,9 @@ public class BlackJack extends Game {
         if (winnerList.isEmpty()) {
             System.out.println("The Dealer wins");
         } else if (BlackJackActions.calculateValue(winnerList.get(0)) == dealerHandValue) {
-            System.out.println("It's a stand! Money will be returned to the users");
+            System.out.println("It's a stand! Money will be returned to the players");
             for (BlackJackPlayer user : winnerList) {
                 user.addMoney(user.getCurrentBet());
-                try {
-                    user.setCurrentBet(0);
-                } catch (Exception ex) {
-                    System.err.println(ex);
-                }
             }
         } else if (BlackJackActions.calculateValue(winnerList.get(0)) > dealerHandValue || dealerHandValue > 21) {
             if (winnerList.size() == 1) {
@@ -196,7 +205,7 @@ public class BlackJack extends Game {
                 System.out.println("We have winners!\n");
             }
             for (BlackJackPlayer user : winnerList) {
-                System.out.println(user.getPlayerID() + "has won $" + (user.getCurrentBet() * payoutMultiplier));
+                System.out.println(user.getPlayerID() + " has won $" + (user.getCurrentBet() * payoutMultiplier));
                 user.addMoney(user.getCurrentBet() * payoutMultiplier);
                 try {
                     user.setCurrentBet(0);

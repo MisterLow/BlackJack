@@ -14,11 +14,11 @@ public abstract class PlayerActions {
      * @param deck
      * @param player
      */
-    public static void hit(Deck deck, Player player) {
+    public static void hit(Deck deck, Player player) throws Exception {
         CardActions.moveCard(deck, player.getHand());
     }
-    
-        /**
+
+    /**
      *
      * @param player
      * @return
