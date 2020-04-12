@@ -11,7 +11,7 @@ import java.util.Collections;
  * @author Alexander Low 991266865
  * @version 2020/03/27
  */
-public class GroupOfCards {
+public abstract class GroupOfCards {
 
     //The group of cards, stored in an ArrayList
     private ArrayList<Card> cards;
@@ -28,18 +28,18 @@ public class GroupOfCards {
      * @return the group of cards.
      */
     public ArrayList<Card> showCards() {
-        return cards;
+        return getCards();
     }
 
     public void shuffle() {
-        Collections.shuffle(cards);
+        Collections.shuffle(getCards());
     }
 
     /**
      * @return the size of the group of cards
      */
     public int getSize() {
-        return this.cards.size();
+        return this.getCards().size();
     }
 
     /**
@@ -50,42 +50,16 @@ public class GroupOfCards {
     }
 
     /**
-     * Move a card from the first place in this Grouping to another Grouping
-     *
-     * @param newLocation The GroupOfCards that you wish to move a Card into
-     */
-    public void moveCard(GroupOfCards newLocation) {
-        moveCard(newLocation, 0);
-    }
-
-    /**
-     * Move a card from this Grouping to another Grouping
-     *
-     * @param newLocation The GroupOfCards that you wish to move a Card into
-     * @param cardLocation The location in the current GroupOfCards that you
-     * wish to remove the card from.
-     */
-    public void moveCard(GroupOfCards newLocation, int cardLocation) {
-        newLocation.cards.add(this.cards.get(cardLocation));
-        this.cards.remove(cardLocation);
-    }
-
-    /**
-     * Move cards from the beginning of the Grouping to another Grouping
-     *
-     * @param amount The amount of cards you wish to move
-     * @param newLocation The GroupOfCards that you wish to move a Card into
-     */
-    public void moveCards(GroupOfCards newLocation,int amount) {
-        for (int i = 0; i < amount; i++) {
-            moveCard(newLocation);
-        }
-    }
-
-    /**
-     *
+     * Remove all cards from the grouping
      */
     public void clearCards() {
-        this.cards.clear();
+        this.getCards().clear();
+    }
+
+    /**
+     * @return the cards
+     */
+    public ArrayList<Card> getCards() {
+        return cards;
     }
 }

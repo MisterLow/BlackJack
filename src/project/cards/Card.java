@@ -35,13 +35,17 @@ public class Card {
     public Suit getSuit() {
         return this.suit;
     }
-    
+
     /**
-     * 
+     *
      * @return A string approximation of the Card
      */
     @Override
     public String toString() {
         return this.getRank() + " of " + this.getSuit();
+    }
+
+    public boolean equals(Card c) {
+        return this.getRank() == c.getRank() && this.getSuit() == c.getSuit();
     }
 }

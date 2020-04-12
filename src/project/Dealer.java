@@ -1,15 +1,28 @@
 package project;
 
+/**
+ * A class to represent the Dealer in BlackJack. There can only be one Dealer in
+ * a game.
+ *
+ * @author Alexander
+ */
 public class Dealer extends Player {
 
-    public Dealer() {
+    public static Dealer dealer = null;
+
+    private Dealer() {
         super("Dealer");
     }
 
-    public boolean play() {
-        if (getValue() < 17) {
-            return true;
+    /**
+     *
+     * @return
+     */
+    public static Dealer getInstance() {
+        if (dealer == null) {
+            dealer = new Dealer();
         }
-        return false;
+        return dealer;
     }
+
 }

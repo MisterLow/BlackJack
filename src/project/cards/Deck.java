@@ -9,7 +9,7 @@ package project.cards;
  */
 public class Deck extends GroupOfCards {
 
-    private int deckAmount;
+    private final int deckAmount;
 
     /**
      * The default constructor that will generate 1 deck of cards
@@ -20,7 +20,7 @@ public class Deck extends GroupOfCards {
 
     /**
      * Generate as many Decks as needed
-     * @param deckAmount
+     * @param deckAmount The number of decks that the user will use
      */
     public Deck(int deckAmount) {
         super(deckAmount * 52);
