@@ -10,7 +10,7 @@ package project.cards;
 public class Hand extends GroupOfCards {
 
     public Hand() {
-        super(12); // The maximum size of a hand with one deck of cards is 12
+        super(21); // The maximum size of a hand with one deck of cards is 21
     }
 
 }

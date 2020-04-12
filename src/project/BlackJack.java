@@ -104,7 +104,6 @@ public class BlackJack extends Game {
             System.err.println(ex);
         }
         for (BlackJackPlayer user : getUsers()) {
-            user.setInRound(true);
             try {
                 CardActions.moveCards(deck, user.getHand(), 2);
             } catch (Exception ex) {
@@ -258,6 +257,7 @@ public class BlackJack extends Game {
     public void newGame() {
         for (BlackJackPlayer user : this.getUsers()) {
             user.getHand().clearCards();
+            user.setInRound(true);
         }
         dealer.getHand().clearCards();
         setupRound();
