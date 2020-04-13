@@ -7,8 +7,11 @@ import java.util.Collections;
  * A concrete class that represents any grouping of cards for a Game.
  *
  * @author megha,2020
+ * @author Christopher Lewis 991585051
+ * @author Alexander Low 991266865
+ * @version 2020/03/27
  */
-public class GroupOfCards {
+public abstract class GroupOfCards {
 
     //The group of cards, stored in an ArrayList
     private ArrayList<Card> cards;
@@ -25,18 +28,18 @@ public class GroupOfCards {
      * @return the group of cards.
      */
     public ArrayList<Card> showCards() {
-        return cards;
+        return getCards();
     }
 
     public void shuffle() {
-        Collections.shuffle(cards);
+        Collections.shuffle(getCards());
     }
 
     /**
      * @return the size of the group of cards
      */
     public int getSize() {
-        return size;
+        return this.getCards().size();
     }
 
     /**
@@ -46,4 +49,17 @@ public class GroupOfCards {
         size = givenSize;
     }
 
-}//end class
+    /**
+     * Remove all cards from the grouping
+     */
+    public void clearCards() {
+        this.getCards().clear();
+    }
+
+    /**
+     * @return the cards
+     */
+    public ArrayList<Card> getCards() {
+        return cards;
+    }
+}

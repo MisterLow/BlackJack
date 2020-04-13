@@ -1,5 +1,7 @@
 package project;
 
+import project.cards.Hand;
+
 /**
  * A class that models each Player in the game. Players have an identifier,
  * which should be unique.
@@ -7,11 +9,12 @@ package project;
  * @author megha,2020
  * @author Christopher Lewis 991585051
  * @author Alexander Low 991266865
- * @version 2020/03/23
+ * @version 2020/03/27
  */
 public abstract class Player {
 
     private String playerID; //the unique ID for this player
+    private Hand hand = new Hand();
 
     /**
      * A constructor that allows you to set the player's unique ID
@@ -38,15 +41,16 @@ public abstract class Player {
         playerID = givenID;
     }
 
-    /**
-     * The method to be instantiated when you subclass the Player class with
-     * your specific type of Player and filled in with logic to play your game.
-     */
-    public abstract void play();
+    public Hand getHand() {
+        return this.hand;
+    }
 
-    public int getHandValue() {
-        // TODO - implement Player.getHandValue
-        throw new UnsupportedOperationException();
+    /**
+     *
+     * @param hand
+     */
+    public void setHand(Hand hand) {
+        this.hand = hand;
     }
 
 }
