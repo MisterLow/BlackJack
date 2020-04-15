@@ -22,66 +22,6 @@ public class BlackJackActionsTest {
     }
 
     /**
-     * Test of calculateValue method, of class BlackJackActions.
-     */
-    @Test
-    public void testCalculateValueReg() {
-        System.out.println("testCalculateValueReg");
-        Card c1 = new Card(Rank.Eight, Suit.Clubs);
-        Card c2 = new Card(Rank.Ten, Suit.Diamonds);
-        BlackJackPlayer p = new BlackJackPlayer("Test");
-        p.getHand().getCards().add(c1);
-        p.getHand().getCards().add(c2);
-        int expResult = 18;
-        assertEquals(expResult, BlackJackActions.calculateValue(p));
-    }
-
-    /**
-     * Test of calculateValue method, of class BlackJackActions.
-     */
-    @Test
-    public void testCalculateValueFace() {
-        System.out.println("testCalculateValueFace");
-        Card c1 = new Card(Rank.Queen, Suit.Clubs);
-        Card c2 = new Card(Rank.Ten, Suit.Diamonds);
-        BlackJackPlayer p = new BlackJackPlayer("Test");
-        p.getHand().getCards().add(c1);
-        p.getHand().getCards().add(c2);
-        int expResult = 20;
-        assertEquals(expResult, BlackJackActions.calculateValue(p));
-    }
-
-    /**
-     * Test of calculateValue method, of class BlackJackActions.
-     */
-    @Test
-    public void testCalculateValueAce() {
-        System.out.println("testCalculateValueAce");
-        Card c1 = new Card(Rank.Ace, Suit.Clubs);
-        Card c2 = new Card(Rank.Jack, Suit.Diamonds);
-        BlackJackPlayer p = new BlackJackPlayer("Test");
-        p.getHand().getCards().add(c1);
-        p.getHand().getCards().add(c2);
-        int expResult = 21;
-        assertEquals(expResult, BlackJackActions.calculateValue(p));
-    }
-
-    /**
-     * Test of calculateValue method, of class BlackJackActions.
-     */
-    @Test
-    public void testCalculateValueAces() {
-        System.out.println("testCalculateValueAces");
-        BlackJackPlayer p = new BlackJackPlayer("Test");
-        Card c1 = new Card(Rank.Ace, Suit.Clubs);
-        p.getHand().getCards().add(c1);
-        p.getHand().getCards().add(c1);
-        p.getHand().getCards().add(c1);
-        int expResult = 13;
-        assertEquals(expResult, BlackJackActions.calculateValue(p));
-    }
-
-    /**
      * Test of getWinners method, of class BlackJackActions.
      */
     @Test
@@ -108,6 +48,7 @@ public class BlackJackActionsTest {
         boolean match = result.containsAll(users);
         assertEquals(expResult, match);
     }
+
     /**
      * Test of getWinners method, of class BlackJackActions.
      */
@@ -134,6 +75,7 @@ public class BlackJackActionsTest {
         assertEquals(true, result.contains(p1));
         assertEquals(false, result.contains(p2));
     }
+
     /**
      * Test of getWinners method, of class BlackJackActions.
      */

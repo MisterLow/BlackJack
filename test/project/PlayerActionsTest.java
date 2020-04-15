@@ -13,19 +13,78 @@ import project.cards.Suit;
  * @author Alexander
  */
 public class PlayerActionsTest {
-    
+
     public PlayerActionsTest() {
     }
 
-        
     @Before
     public void setUp() {
         Dealer.getInstance().getHand().clearCards();
     }
 
-    
+    /**
+     * Test of calculateValue method, of class PlayerActions.
+     */
+    @Test
+    public void testCalculateValueReg() {
+        System.out.println("testCalculateValueReg");
+        Card c1 = new Card(Rank.Eight, Suit.Clubs);
+        Card c2 = new Card(Rank.Ten, Suit.Diamonds);
+        BlackJackPlayer p = new BlackJackPlayer("Test");
+        p.getHand().getCards().add(c1);
+        p.getHand().getCards().add(c2);
+        int expResult = 18;
+        assertEquals(expResult, PlayerActions.calculateValue(p));
+    }
+
+    /**
+     * Test of calculateValue method, of class BlackJackActions.
+     */
+    @Test
+    public void testCalculateValueFace() {
+        System.out.println("testCalculateValueFace");
+        Card c1 = new Card(Rank.Queen, Suit.Clubs);
+        Card c2 = new Card(Rank.Ten, Suit.Diamonds);
+        BlackJackPlayer p = new BlackJackPlayer("Test");
+        p.getHand().getCards().add(c1);
+        p.getHand().getCards().add(c2);
+        int expResult = 20;
+        assertEquals(expResult, PlayerActions.calculateValue(p));
+    }
+
+    /**
+     * Test of calculateValue method, of class BlackJackActions.
+     */
+    @Test
+    public void testCalculateValueAce() {
+        System.out.println("testCalculateValueAce");
+        Card c1 = new Card(Rank.Ace, Suit.Clubs);
+        Card c2 = new Card(Rank.Jack, Suit.Diamonds);
+        BlackJackPlayer p = new BlackJackPlayer("Test");
+        p.getHand().getCards().add(c1);
+        p.getHand().getCards().add(c2);
+        int expResult = 21;
+        assertEquals(expResult, PlayerActions.calculateValue(p));
+    }
+
+    /**
+     * Test of calculateValue method, of class PlayerActions.
+     */
+    @Test
+    public void testCalculateValueAces() {
+        System.out.println("testCalculateValueAces");
+        BlackJackPlayer p = new BlackJackPlayer("Test");
+        Card c1 = new Card(Rank.Ace, Suit.Clubs);
+        p.getHand().getCards().add(c1);
+        p.getHand().getCards().add(c1);
+        p.getHand().getCards().add(c1);
+        int expResult = 13;
+        assertEquals(expResult, PlayerActions.calculateValue(p));
+    }
+
     /**
      * Test of hit method, of class PlayerActions.
+     *
      * @throws java.lang.Exception
      */
     @Test
@@ -38,6 +97,57 @@ public class PlayerActionsTest {
         PlayerActions.hit(deck, d);
         int result = deck.getSize();
         int expResult = 50;
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of hit method, of class PlayerActions.
+     *
+     * @throws java.lang.Exception
+     */
+    @Test(expected = Exception.class)
+    public void testHitException() throws Exception {
+        System.out.println("hitException");
+        Deck deck = new Deck();
+        deck.clearCards();
+        BlackJackPlayer p = new BlackJackPlayer("Test");
+        Dealer d = Dealer.getInstance();
+        PlayerActions.hit(deck, p);
+        PlayerActions.hit(deck, d);
+        int result = deck.getSize();
+        int expResult = 50;
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of hit method, of class PlayerActions.
+     *
+     * @throws java.lang.Exception
+     */
+    @Test
+    public void testHitDealer() throws Exception {
+        System.out.println("hitDealer");
+        Deck deck = new Deck();
+        Dealer d = Dealer.getInstance();
+        PlayerActions.hit(deck, d);
+        int result = deck.getSize();
+        int expResult = 51;
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of hit method, of class PlayerActions.
+     *
+     * @throws java.lang.Exception
+     */
+    @Test
+    public void testHitPlayer() throws Exception {
+        System.out.println("hitPlayer");
+        Deck deck = new Deck();
+        BlackJackPlayer p = new BlackJackPlayer("Test");
+        PlayerActions.hit(deck, p);
+        int result = deck.getSize();
+        int expResult = 51;
         assertEquals(expResult, result);
     }
 
@@ -73,5 +183,5 @@ public class PlayerActionsTest {
         System.out.println(result);
         assertEquals(expResult, result);
     }
-    
+
 }

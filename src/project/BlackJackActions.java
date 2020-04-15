@@ -11,40 +11,6 @@ import project.cards.Card;
 public class BlackJackActions {
 
     /**
-     * Get the value of the Player's hand
-     *
-     * @param p The player whose hand you want to check the value of
-     * @return the value of the hand in BlackJack
-     */
-    public static int calculateValue(Player p) {
-        int hValue = 0;
-        int aceCount = 0;
-        for (Card c : p.getHand().showCards()) {
-            int cValue = c.getRank().getValue();
-            switch (cValue) {
-                case 11:
-                    cValue = 10;
-                    break;
-                case 12:
-                    cValue = 10;
-                    break;
-                case 13:
-                    cValue = 10;
-                    break;
-                case 1:
-                    aceCount++;
-                    break;
-            }
-            hValue += cValue;
-        }
-        while (aceCount > 0 && ((hValue+10) <= 21)) {
-            hValue += 10;
-            aceCount--;
-        }
-        return hValue;
-    }
-
-    /**
      * Get all users with the closest hand to 21
      *
      * @param users
@@ -56,8 +22,8 @@ public class BlackJackActions {
         // First find the player with the closest value to 21
         int closestValue = 0;
         for (BlackJackPlayer currPlayer : users) {
-            if (calculateValue(currPlayer) <= 21 && calculateValue(currPlayer) >= closestValue) {
-                closestValue = calculateValue(currPlayer);
+            if (PlayerActions.calculateValue(currPlayer) <= 21 && PlayerActions.calculateValue(currPlayer) >= closestValue) {
+                closestValue = PlayerActions.calculateValue(currPlayer);
                 winnerList.add(currPlayer);
             }
         }
@@ -66,7 +32,7 @@ public class BlackJackActions {
         Iterator<BlackJackPlayer> itPlayer = winnerList.iterator();
         while (itPlayer.hasNext()) {
             BlackJackPlayer user = itPlayer.next();
-            if (calculateValue(user) < closestValue) {
+            if (PlayerActions.calculateValue(user) < closestValue) {
                 itPlayer.remove();
             }
         }

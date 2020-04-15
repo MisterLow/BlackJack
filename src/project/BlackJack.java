@@ -44,7 +44,8 @@ public class BlackJack extends Game {
 
         //Dealer's turn
         try {
-            System.out.println("\n" + DealerActions.dealerPlay(deck, dealer));
+            DealerActions.dealerPlay(deck, dealer);
+            System.out.println("\n" + DealerActions.playerHandString(dealer));
         } catch (Exception ex) {
             System.err.println(ex);
         }
@@ -138,9 +139,10 @@ public class BlackJack extends Game {
     }
 
     /**
-     * Prompt the user to make a move based on which options that they should
-     * be able to make (Doubling down if it's their first turn and they have
-     * enough money, Hitting or Standing)
+     * Prompt the user to make a move based on which options that they should be
+     * able to make (Doubling down if it's their first turn and they have enough
+     * money, Hitting or Standing)
+     *
      * @param user The Player that is making the move
      */
     public void userMove(BlackJackPlayer user) {
@@ -176,7 +178,7 @@ public class BlackJack extends Game {
             } else if (response.equalsIgnoreCase("S")) {
                 BlackJackPlayerActions.stand(user);
             }
-            if ((BlackJackActions.calculateValue(user) > 21)) {
+            if ((PlayerActions.calculateValue(user) > 21)) {
                 BlackJackPlayerActions.stand(user);
             }
         } while (user.getInRound());
@@ -184,6 +186,7 @@ public class BlackJack extends Game {
 
     /**
      * Print the amount of money that the user has
+     *
      * @param user
      */
     public void printMoney(BlackJackPlayer user) {
@@ -191,24 +194,24 @@ public class BlackJack extends Game {
     }
 
     /**
-     * Find out who won the game and appropriately reward them. There are 3
-     * main outcomes that can happen. Either the Dealer wins, the Dealer and 
-     * Players tie, resulting in their money being refunded, or they players 
-     * win and are rewarded
+     * Find out who won the game and appropriately reward them. There are 3 main
+     * outcomes that can happen. Either the Dealer wins, the Dealer and Players
+     * tie, resulting in their money being refunded, or they players win and are
+     * rewarded
      */
     @Override
     public void declareWinner() {
         ArrayList<BlackJackPlayer> winnerList = BlackJackActions.getWinners(getUsers());
-        int dealerHandValue = BlackJackActions.calculateValue(dealer);
+        int dealerHandValue = PlayerActions.calculateValue(dealer);
         // If all Players have busted the Dealer will automatically win
         if (winnerList.isEmpty()) {
             System.out.println("The Dealer wins");
-        } else if (BlackJackActions.calculateValue(winnerList.get(0)) == dealerHandValue) {
+        } else if (PlayerActions.calculateValue(winnerList.get(0)) == dealerHandValue) {
             System.out.println("It's a stand! Money will be returned to the players");
             for (BlackJackPlayer user : winnerList) {
                 user.addMoney(user.getCurrentBet());
             }
-        } else if (BlackJackActions.calculateValue(winnerList.get(0)) > dealerHandValue || dealerHandValue > 21) {
+        } else if (PlayerActions.calculateValue(winnerList.get(0)) > dealerHandValue || dealerHandValue > 21) {
             if (winnerList.size() == 1) {
                 System.out.println("We have a winner\n");
             } else {
