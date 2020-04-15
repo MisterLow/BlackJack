@@ -25,7 +25,7 @@ public abstract class PlayerActions {
      * @return
      */
     public static String playerHandString(Player player) {
-        String handString = player.getPlayerID() + "'s hand contains: \n";
+        String handString = player.getPlayerID() + "'s hand contains:\n";
         for (int i = 0; i < player.getHand().getSize(); i++) {
             handString += player.getHand().getCards().get(i).toString() + "\n";
         }
