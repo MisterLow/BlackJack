@@ -201,7 +201,7 @@ public class BlackJack extends Game {
      */
     @Override
     public void declareWinner() {
-        ArrayList<BlackJackPlayer> winnerList = BlackJackActions.getWinners(getUsers());
+        ArrayList<BlackJackPlayer> winnerList = BlackJackPlayerActions.getWinners(getUsers());
         int dealerHandValue = PlayerActions.calculateValue(dealer);
         // If all Players have busted the Dealer will automatically win
         if (winnerList.isEmpty()) {
