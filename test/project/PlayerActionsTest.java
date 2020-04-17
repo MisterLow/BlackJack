@@ -21,7 +21,6 @@ public class PlayerActionsTest {
     public void tearDown() {
         Dealer.getInstance().getHand().clearCards();
     }
-    
 
     /**
      * Test of calculateValue method, of class PlayerActions.
@@ -178,7 +177,6 @@ public class PlayerActionsTest {
         p.getHand().getCards().add(c2);
         String expResult = "Dealer's hand contains:\nEight of Hearts\nFour of Spades\nWhich is a value of 12\n";
         String result = PlayerActions.playerHandString(p);
-        System.out.println(result);
         assertEquals(expResult, result);
     }
 

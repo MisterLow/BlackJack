@@ -26,11 +26,11 @@ public class BlackJackPlayerActions extends PlayerActions {
      * @throws java.lang.Exception
      */
     public static void doubleDown(Deck deck, BlackJackPlayer user) throws Exception {
-        if (user.getCurrentBet() < user.getMoney()) {
+        if (user.getCurrentBet() <= user.getMoney()) {
             user.setCurrentBet(user.getCurrentBet());
+            hit(deck, user);
+            stand(user);
         }
-        hit(deck, user);
-        stand(user);
     }
 
     /**
