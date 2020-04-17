@@ -11,7 +11,8 @@ public class DealerActions extends PlayerActions {
     /**
      *
      * @param dealer
-     * @return
+     * @return A string representing the Dealer's hand, with the first card
+     * hidden
      */
     public static String playerHandString(Player dealer) {
         String handString = "Dealer's hand contains: \n";
@@ -27,10 +28,17 @@ public class DealerActions extends PlayerActions {
         return handString;
     }
 
-    public static String dealerPlay(Deck deck, Dealer dealer) {
-        while (BlackJackActions.calculateValue(dealer) <= 17) {
+    /**
+     * The dealer will continuously hit while the Dealer's hand's value is under
+     * 17
+     *
+     * @param deck
+     * @param dealer
+     * @throws Exception
+     */
+    public static void dealerPlay(Deck deck, Dealer dealer) throws Exception {
+        while (calculateValue(dealer) <= 17) {
             hit(deck, dealer);
         }
-        return PlayerActions.playerHandString(dealer);
     }
 }

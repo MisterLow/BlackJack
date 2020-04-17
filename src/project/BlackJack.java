@@ -1,11 +1,9 @@
 package project;
 
+import project.cards.CardActions;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import project.cards.CardActions;
 import project.cards.Deck;
 
 public class BlackJack extends Game {
@@ -45,7 +43,12 @@ public class BlackJack extends Game {
         }
 
         //Dealer's turn
-        System.out.println("\n" + DealerActions.dealerPlay(deck, dealer));
+        try {
+            DealerActions.dealerPlay(deck, dealer);
+            System.out.println("\n" + DealerActions.playerHandString(dealer));
+        } catch (Exception ex) {
+            System.err.println(ex);
+        }
 
         declareWinner();
         endGame();
@@ -70,7 +73,7 @@ public class BlackJack extends Game {
 
             name = ln.nextLine();
             if (name.isEmpty() && playerNum == 1) {
-                name = "Default";
+                name = "DefaultName";
                 addUser(new BlackJackPlayer(name));
                 playerNum++;
                 name = "";
@@ -95,7 +98,7 @@ public class BlackJack extends Game {
     /**
      *
      */
-    public void setupRound() {
+    private void setupRound() {
         deck.generateDeck();
         deck.shuffle();
         try {
@@ -117,7 +120,7 @@ public class BlackJack extends Game {
      * @param user
      * @throws java.lang.Exception
      */
-    public void makeBet(BlackJackPlayer user) throws Exception {
+    private void makeBet(BlackJackPlayer user) throws Exception {
         int bet;
         boolean validBet = false;
         do {
@@ -136,14 +139,17 @@ public class BlackJack extends Game {
     }
 
     /**
+     * Prompt the user to make a move based on which options that they should be
+     * able to make (Doubling down if it's their first turn and they have enough
+     * money, Hitting or Standing)
      *
-     * @param user
+     * @param user The Player that is making the move
      */
-    public void userMove(BlackJackPlayer user) {
+    private void userMove(BlackJackPlayer user) {
         String prompt;
         do {
             prompt = "What would you like to do " + user.getPlayerID() + "? (";
-            if (user.getHand().getSize() == 2 && (user.getCurrentBet() * 2) <= user.getMoney()) {
+            if (user.getHand().getSize() == 2 && (user.getCurrentBet()) <= user.getMoney()) {
                 prompt += "Double Down, ";
             }
             prompt += "Hit or Stand): ";
@@ -155,8 +161,12 @@ public class BlackJack extends Game {
             } else {
                 response = response.substring(0, 1);
             }
-            if (response.equalsIgnoreCase("D") && user.getHand().getSize() == 2 && (user.getCurrentBet() * 2) <= user.getMoney()) {
-                BlackJackPlayerActions.doubleDown(deck, user);
+            if (response.equalsIgnoreCase("D") && user.getHand().getSize() == 2 && (user.getCurrentBet()) <= user.getMoney()) {
+                try {
+                    BlackJackPlayerActions.doubleDown(deck, user);
+                } catch (Exception ex) {
+                    System.err.println(ex);
+                }
                 System.out.println(BlackJackPlayerActions.playerHandString(user));
             } else if (response.equalsIgnoreCase("H")) {
                 try {
@@ -168,36 +178,40 @@ public class BlackJack extends Game {
             } else if (response.equalsIgnoreCase("S")) {
                 BlackJackPlayerActions.stand(user);
             }
-            if ((BlackJackActions.calculateValue(user) > 21)) {
+            if ((PlayerActions.calculateValue(user) > 21)) {
                 BlackJackPlayerActions.stand(user);
             }
         } while (user.getInRound());
     }
 
     /**
+     * Print the amount of money that the user has
      *
      * @param user
      */
-    public void printMoney(BlackJackPlayer user) {
-        System.out.println("\nYou currently have: " + user.getMoney());
+    private void printMoney(BlackJackPlayer user) {
+        System.out.println("\n" + user.getPlayerID() + " currently has $" + user.getMoney());
     }
 
     /**
-     * Find out who won the game and appropriately reward them
+     * Find out who won the game and appropriately reward them. There are 3 main
+     * outcomes that can happen. Either the Dealer wins, the Dealer and Players
+     * tie, resulting in their money being refunded, or they players win and are
+     * rewarded
      */
     @Override
     public void declareWinner() {
-        ArrayList<BlackJackPlayer> winnerList = BlackJackActions.getWinners(getUsers());
-        int dealerHandValue = BlackJackActions.calculateValue(dealer);
+        ArrayList<BlackJackPlayer> winnerList = BlackJackPlayerActions.getWinners(getUsers());
+        int dealerHandValue = PlayerActions.calculateValue(dealer);
         // If all Players have busted the Dealer will automatically win
         if (winnerList.isEmpty()) {
             System.out.println("The Dealer wins");
-        } else if (BlackJackActions.calculateValue(winnerList.get(0)) == dealerHandValue) {
+        } else if (PlayerActions.calculateValue(winnerList.get(0)) == dealerHandValue) {
             System.out.println("It's a stand! Money will be returned to the players");
             for (BlackJackPlayer user : winnerList) {
                 user.addMoney(user.getCurrentBet());
             }
-        } else if (BlackJackActions.calculateValue(winnerList.get(0)) > dealerHandValue || dealerHandValue > 21) {
+        } else if (PlayerActions.calculateValue(winnerList.get(0)) > dealerHandValue || dealerHandValue > 21) {
             if (winnerList.size() == 1) {
                 System.out.println("We have a winner\n");
             } else {
@@ -221,7 +235,7 @@ public class BlackJack extends Game {
      * Remove any users who have no money and ask any remaining users if they
      * want to continue playing
      */
-    public void endGame() {
+    private void endGame() {
         Iterator<BlackJackPlayer> itPlayer = getUsers().iterator();
         while (itPlayer.hasNext()) {
             BlackJackPlayer user = itPlayer.next();
@@ -254,7 +268,7 @@ public class BlackJack extends Game {
     /**
      * Ready the game for a new round
      */
-    public void newGame() {
+    private void newGame() {
         for (BlackJackPlayer user : this.getUsers()) {
             user.getHand().clearCards();
             user.setInRound(true);

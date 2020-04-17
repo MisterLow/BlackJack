@@ -37,7 +37,7 @@ public class Card {
     }
 
     /**
-     *
+     * A method to turn a Card object into a String representation of itself
      * @return A string approximation of the Card
      */
     @Override
