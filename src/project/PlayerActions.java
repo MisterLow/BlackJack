@@ -1,7 +1,7 @@
 package project;
 
-import project.cards.Card;
 import project.cards.CardActions;
+import project.cards.Card;
 import project.cards.Deck;
 
 /**

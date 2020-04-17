@@ -1,9 +1,9 @@
 package project;
 
+import project.cards.CardActions;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
-import project.cards.CardActions;
 import project.cards.Deck;
 
 public class BlackJack extends Game {
@@ -98,7 +98,7 @@ public class BlackJack extends Game {
     /**
      *
      */
-    public void setupRound() {
+    private void setupRound() {
         deck.generateDeck();
         deck.shuffle();
         try {
@@ -120,7 +120,7 @@ public class BlackJack extends Game {
      * @param user
      * @throws java.lang.Exception
      */
-    public void makeBet(BlackJackPlayer user) throws Exception {
+    private void makeBet(BlackJackPlayer user) throws Exception {
         int bet;
         boolean validBet = false;
         do {
@@ -145,11 +145,11 @@ public class BlackJack extends Game {
      *
      * @param user The Player that is making the move
      */
-    public void userMove(BlackJackPlayer user) {
+    private void userMove(BlackJackPlayer user) {
         String prompt;
         do {
             prompt = "What would you like to do " + user.getPlayerID() + "? (";
-            if (user.getHand().getSize() == 2 && (user.getCurrentBet() * 2) <= user.getMoney()) {
+            if (user.getHand().getSize() == 2 && (user.getCurrentBet()) <= user.getMoney()) {
                 prompt += "Double Down, ";
             }
             prompt += "Hit or Stand): ";
@@ -161,7 +161,7 @@ public class BlackJack extends Game {
             } else {
                 response = response.substring(0, 1);
             }
-            if (response.equalsIgnoreCase("D") && user.getHand().getSize() == 2 && (user.getCurrentBet() * 2) <= user.getMoney()) {
+            if (response.equalsIgnoreCase("D") && user.getHand().getSize() == 2 && (user.getCurrentBet()) <= user.getMoney()) {
                 try {
                     BlackJackPlayerActions.doubleDown(deck, user);
                 } catch (Exception ex) {
@@ -189,7 +189,7 @@ public class BlackJack extends Game {
      *
      * @param user
      */
-    public void printMoney(BlackJackPlayer user) {
+    private void printMoney(BlackJackPlayer user) {
         System.out.println("\n" + user.getPlayerID() + " currently has $" + user.getMoney());
     }
 
@@ -235,7 +235,7 @@ public class BlackJack extends Game {
      * Remove any users who have no money and ask any remaining users if they
      * want to continue playing
      */
-    public void endGame() {
+    private void endGame() {
         Iterator<BlackJackPlayer> itPlayer = getUsers().iterator();
         while (itPlayer.hasNext()) {
             BlackJackPlayer user = itPlayer.next();
@@ -268,7 +268,7 @@ public class BlackJack extends Game {
     /**
      * Ready the game for a new round
      */
-    public void newGame() {
+    private void newGame() {
         for (BlackJackPlayer user : this.getUsers()) {
             user.getHand().clearCards();
             user.setInRound(true);

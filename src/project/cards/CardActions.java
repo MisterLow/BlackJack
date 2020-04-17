@@ -1,5 +1,8 @@
 package project.cards;
 
+import project.cards.Card;
+import project.cards.GroupOfCards;
+
 /**
  * A class for the interactions between different GroupOfCards objects
  *
